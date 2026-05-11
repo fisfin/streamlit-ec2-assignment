@@ -3,6 +3,7 @@ import pandas as pd
 import time
 import re
 from PIL import Image
+from datetime import datetime
 
 # ==========================================
 # 1. 페이지 기본 설정 및 디자인 (CSS)
