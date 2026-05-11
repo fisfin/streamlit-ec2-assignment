@@ -111,7 +111,7 @@ if 'user_answers' not in st.session_state:
 # ==========================================
 if not st.session_state['logged_in']:
     # 시작 화면 배경
-    st.image("image/start_bg.jpg", use_container_width=True)
+    st.image("image/start_bg.jpg", width="stretch")
     st.title("🎮 게임 성향 테스트")
     
     # [보완] 실제 로그인 처리를 위한 사용자 정보 정의
@@ -156,7 +156,7 @@ elif not st.session_state['test_completed']:
     
     for i, opt in enumerate(q_data['options']):
         is_sel = (st.session_state['user_answers'].get(idx) == i)
-        if st.button(opt['text'], key=f"q{idx}o{i}", type="primary" if is_sel else "secondary", use_container_width=True):
+        if st.button(opt['text'], key=f"q{idx}o{i}", type="primary" if is_sel else "secondary", width="stretch"):
             st.session_state['user_answers'][idx] = i
             st.rerun()
 
@@ -202,11 +202,11 @@ else:
         file_name = f"image/{res.lower()}.png"
         
         try:
-            st.image(file_name, use_container_width=True)
+            st.image(file_name, width="stretch")
         except Exception:
             # 예외 처리: 파일이 없을 경우 DiceBear API로 임시 아바타 생성
             st.warning("이미지를 찾을 수 없어 임시 아바타를 표시합니다.")
-            st.image(f"https://api.dicebear.com/7.x/adventurer/svg?seed={res}&backgroundColor=c0aede", use_container_width=True)
+            st.image(f"https://api.dicebear.com/7.x/adventurer/svg?seed={res}&backgroundColor=c0aede", width="stretch")
         
     with c2:
         st.markdown(f"### {st.session_state['user_nickname']}님은...")
@@ -225,11 +225,11 @@ else:
     for i, row in reco.sample(n=min(3, len(reco))).reset_index(drop=True).iterrows():
         with cols[i]:
             # 스팀 이미지 로드
-            st.image(f"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/{int(row['AppID'])}/header.jpg", use_container_width=True)
+            st.image(f"https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/{int(row['AppID'])}/header.jpg", width="stretch")
             st.markdown(f"**{row['Name']}**")
             st.caption(f"장르: {row['Tags']}")
-            st.link_button("🎮 스팀 상점", f"https://store.steampowered.com/app/{int(row['AppID'])}", use_container_width=True)
+            st.link_button("🎮 스팀 상점", f"https://store.steampowered.com/app/{int(row['AppID'])}", width="stretch")
 
-    if st.button("다시 테스트하기 🔄", use_container_width=True):
+    if st.button("다시 테스트하기 🔄", width="stretch"):
         st.session_state.clear()
         st.rerun()
