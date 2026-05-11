@@ -128,6 +128,7 @@ if not st.session_state['logged_in']:
         if submit_button:
             # [보완] 입력값과 정의된 정보 비교 (실제 로그인 처리 로직)
             if input_id == USER_ID and input_pw == USER_PW:
+                print(f"[{datetime.now()}] LOGIN SUCCESS: user_id={input_id}", flush=True)
                 st.session_state['logged_in'] = True
                 st.session_state['user_nickname'] = input_pw # 로그인 성공 시 상태 구분
                 st.success(f"{input_pw}님, 환영합니다! 테스트 화면으로 이동합니다.")
@@ -157,6 +158,7 @@ elif not st.session_state['test_completed']:
     for i, opt in enumerate(q_data['options']):
         is_sel = (st.session_state['user_answers'].get(idx) == i)
         if st.button(opt['text'], key=f"q{idx}o{i}", type="primary" if is_sel else "secondary", width="stretch"):
+            print(f"[{datetime.now()}] ANSWER SELECTED: question={idx + 1}, option={i + 1}", flush=True)
             st.session_state['user_answers'][idx] = i
             st.rerun()
 
